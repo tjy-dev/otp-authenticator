@@ -11,7 +11,7 @@ import SwiftUI
 struct CodeView: View {
     
     @ObservedObject
-    var timerModel = TimerViewModel()
+    var timerModel: TimerViewModel
     
     var body: some View {
         HStack {

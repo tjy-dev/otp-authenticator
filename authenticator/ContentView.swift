@@ -16,10 +16,13 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    @ObservedObject
+    var timerModel = TimerViewModel()
+    
     var body: some View {
         NavigationView {
             HStack {
-                CodeView()
+                CodeView(timerModel: timerModel)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
