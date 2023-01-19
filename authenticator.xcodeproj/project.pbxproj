@@ -16,6 +16,10 @@
 		7A9A02C8296FA776007D5E87 /* authenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02C7296FA776007D5E87 /* authenticatorTests.swift */; };
 		7A9A02D2296FA776007D5E87 /* authenticatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02D1296FA776007D5E87 /* authenticatorUITests.swift */; };
 		7A9A02D4296FA776007D5E87 /* authenticatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02D3296FA776007D5E87 /* authenticatorUITestsLaunchTests.swift */; };
+		7A9D107729782D4B007EDAAA /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D107629782D4B007EDAAA /* CodeView.swift */; };
+		7A9D107929782DB3007EDAAA /* CodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D107829782DB3007EDAAA /* CodeViewModel.swift */; };
+		7A9D107B29782E2C007EDAAA /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D107A29782E2C007EDAAA /* TimerViewModel.swift */; };
+		7AC384922978C3FF00C19993 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC384912978C3FF00C19993 /* TimerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,10 @@
 		7A9A02CD296FA776007D5E87 /* authenticatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = authenticatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9A02D1296FA776007D5E87 /* authenticatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticatorUITests.swift; sourceTree = "<group>"; };
 		7A9A02D3296FA776007D5E87 /* authenticatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7A9D107629782D4B007EDAAA /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		7A9D107829782DB3007EDAAA /* CodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewModel.swift; sourceTree = "<group>"; };
+		7A9D107A29782E2C007EDAAA /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		7AC384912978C3FF00C19993 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,9 @@
 			children = (
 				7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */,
 				7A9A02B2296FA775007D5E87 /* ContentView.swift */,
+				7A9D107629782D4B007EDAAA /* CodeView.swift */,
+				7A9D107C29782F2C007EDAAA /* ViewModel */,
+				7AC384902978C3EB00C19993 /* Models */,
 				7A9A02B4296FA776007D5E87 /* Assets.xcassets */,
 				7A9A02B9296FA776007D5E87 /* Persistence.swift */,
 				7A9A02BE296FA776007D5E87 /* Info.plist */,
@@ -133,6 +144,23 @@
 				7A9A02D3296FA776007D5E87 /* authenticatorUITestsLaunchTests.swift */,
 			);
 			path = authenticatorUITests;
+			sourceTree = "<group>";
+		};
+		7A9D107C29782F2C007EDAAA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D107829782DB3007EDAAA /* CodeViewModel.swift */,
+				7A9D107A29782E2C007EDAAA /* TimerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7AC384902978C3EB00C19993 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AC384912978C3FF00C19993 /* TimerModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +293,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A9D107B29782E2C007EDAAA /* TimerViewModel.swift in Sources */,
 				7A9A02BA296FA776007D5E87 /* Persistence.swift in Sources */,
 				7A9A02BD296FA776007D5E87 /* authenticator.xcdatamodeld in Sources */,
 				7A9A02B3296FA775007D5E87 /* ContentView.swift in Sources */,
+				7A9D107729782D4B007EDAAA /* CodeView.swift in Sources */,
+				7AC384922978C3FF00C19993 /* TimerModel.swift in Sources */,
+				7A9D107929782DB3007EDAAA /* CodeViewModel.swift in Sources */,
 				7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
