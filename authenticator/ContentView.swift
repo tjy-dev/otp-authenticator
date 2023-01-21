@@ -22,6 +22,17 @@ struct ContentView: View {
     @State
     var codes = ["1", "2", "3", "4", "5", "6"]
     
+    init() {
+        // set navigatino bar title attributes
+        // e.g. custom fonts
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font: UIFont(name: "AvenirNext-DemiBold", size: 20) ?? .systemFont(ofSize: 20, weight: .medium)
+        ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .font: UIFont(name: "AvenirNext-Bold", size: 30) ?? .systemFont(ofSize: 30)
+        ]
+    }
+    
     var body: some View {
         NavigationView {
             GeometryReader { geo in
@@ -42,6 +53,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .navigationTitle("Authenticator")
                 .background(Color(.background))
             }
         }
