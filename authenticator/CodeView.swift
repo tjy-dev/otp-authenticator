@@ -46,8 +46,9 @@ struct CodeView: View {
                 HStack {
                     ForEach(codes, id: \.self) { c in
                         Text(c)
-                            .font(Font.system(size: 30))
-                            .frame(width: 40, height: 50)
+                            .font(
+                                .custom("AvenirNext-DemiBold", size: 30, relativeTo: .title))
+                            .frame(width: 40, height: 45)
                             .foregroundColor(Color(.highlightText))
                             .background(Color(.codeBackground))
                             .cornerRadius(10)
