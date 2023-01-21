@@ -26,10 +26,10 @@ struct ContentView: View {
         // set navigatino bar title attributes
         // e.g. custom fonts
         UINavigationBar.appearance().titleTextAttributes = [
-            .font: UIFont(name: "AvenirNext-DemiBold", size: 20) ?? .systemFont(ofSize: 20, weight: .medium)
+            .font: UIFont.avenirDemiBold(20)
         ]
         UINavigationBar.appearance().largeTitleTextAttributes = [
-            .font: UIFont(name: "AvenirNext-Bold", size: 30) ?? .systemFont(ofSize: 30)
+            .font: UIFont.avenirBold(30)
         ]
     }
     

@@ -28,9 +28,9 @@ struct CodeView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Code View")
-                            .font(.headline)
+                            .font(.avenirBold())
                         Text(verbatim: "name@example.com")
-                            .font(.body)
+                            .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
                     }
                     Spacer()
@@ -43,8 +43,7 @@ struct CodeView: View {
                     ForEach(codes, id: \.self) { c in
                         Text(c)
                             .forground(timerModel: timerModel)
-                            .font(
-                                .custom("AvenirNext-DemiBold", size: 30, relativeTo: .title))
+                            .font(.avenirBold(30))
                             .frame(width: 40, height: 45)
                             .foregroundColor(Color(.highlightText))
                             .background(timerModel: timerModel)
