@@ -28,7 +28,7 @@ struct CodeView: View {
                             .foregroundColor(Color(.secondaryLabel))
                     }
                     Spacer()
-                    Text("\(timerModel.model.remainingTime)")
+                    ProgressBar(height: 30, width: 30, stroke: 7, max: 30, to: $timerModel.model.remainingTime)
                 }
                 Spacer().frame(height: 15)
                 HStack {
