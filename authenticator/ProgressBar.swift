@@ -14,8 +14,7 @@ struct ProgressBar: View {
     var width:  CGFloat = 100
     var stroke: CGFloat = 15
     
-    @Binding
-    var from: CGFloat
+    var max: CGFloat = 30
     
     @Binding
     var to: CGFloat
@@ -27,7 +26,7 @@ struct ProgressBar: View {
             .overlay(
                 Circle()
                     .rotation(Angle(degrees: -90))
-                    .trim(from: from, to: to)
+                    .trim(from: 0, to: to)
                     .stroke(style: StrokeStyle(
                         lineWidth: stroke,
                         lineCap: .round,
@@ -36,20 +35,16 @@ struct ProgressBar: View {
                     
             )
     }
-    
 }
 
 struct ProgressPreview: PreviewProvider {
 
     @State static
-    var from: CGFloat = 0
-
-    @State static
-    var to:   CGFloat = 0.5
+    var to: CGFloat = 0.8
     
     static
     var previews: some View {
-        ProgressBar(height: 100, width: 100, stroke: 20, from: $from, to: $to)
+        ProgressBar(height: 100, width: 100, stroke: 20, to: $to)
     }
 
 }
