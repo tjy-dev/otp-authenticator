@@ -9,29 +9,37 @@ import Foundation
 
 struct TimeModel {
     
-    var remainingTime: Int
+    private
+    var internalRemaningTime: Int
     
-    init() {
-        remainingTime = TimeModel.generateRemainingTime()
+    /// Returns remaining time from 1...30 (doesn't include 0)
+    var remainingTime: CGFloat {
+        get { CGFloat(self.internalRemaningTime + 1) }
+        set {}
     }
     
-    // because this is a general function acquireing Unixtime % 30,
-    // it is a static method.
+    init() {
+        internalRemaningTime = TimeModel.generateinternalRemaningTime()
+    }
+    
+    /// Returns: Unix-time interval from 1970.
     static
-    func generateRemainingTime() -> Int {
+    func generateinternalRemaningTime() -> Int {
+        // Because this is a general function acquireing Unixtime % 30,
+        // it is a static method.
         let date = Date.now
         let unixTime: TimeInterval = date.timeIntervalSince1970
         let unixTimeInt = Int(unixTime)
         return (30 - unixTimeInt % 30)
     }
 
-    // this decreases the remaining time by 1 sec.
-    // because (remainingTime - 1) % 30 would return
-    // -1 when remainingTime == 0,
-    // it adds 29 instead of subtracting 1.
+    /// Decrease the remaining time by 1 sec.
     mutating
     func decrement() {
-        remainingTime += 29
-        remainingTime %= 30
+        // (internalRemaningTime - 1) % 30 -> -1,
+        // when internalRemaningTime == 0.
+        // Thus adds 29 instead of subtracting 1.
+        internalRemaningTime += 29
+        internalRemaningTime %= 30
     }
 }

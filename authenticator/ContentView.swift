@@ -19,22 +19,31 @@ struct ContentView: View {
     @ObservedObject
     var timerModel = TimerViewModel()
     
+    @State
+    var codes = ["1", "2", "3", "4", "5", "6"]
+    
     var body: some View {
         NavigationView {
-            HStack {
-                CodeView(timerModel: timerModel)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+            GeometryReader { geo in
+                ScrollView {
+                    VStack {
+                        CodeView(timerModel: timerModel, codes: $codes)
+                        CodeView(timerModel: timerModel, codes: $codes)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
+                        }
+                        ToolbarItem {
+                            Button(action: addItem) {
+                                Label("Add Item", systemImage: "plus")
+                            }
+                        }
                     }
                 }
+                .background(Color(.background))
             }
-            Text("Select an item")
         }
     }
 

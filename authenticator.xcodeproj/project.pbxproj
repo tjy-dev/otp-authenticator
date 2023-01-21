@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A3377CC297BDE1E00495CE2 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CB297BDE1E00495CE2 /* ColorExtension.swift */; };
+		7A3377CE297BE86500495CE2 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CD297BE86500495CE2 /* ProgressBar.swift */; };
 		7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */; };
 		7A9A02B3296FA775007D5E87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B2296FA775007D5E87 /* ContentView.swift */; };
 		7A9A02B5296FA776007D5E87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9A02B4296FA776007D5E87 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A3377CB297BDE1E00495CE2 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		7A3377CD297BE86500495CE2 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		7A9A02AD296FA775007D5E87 /* authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticatorApp.swift; sourceTree = "<group>"; };
 		7A9A02B2296FA775007D5E87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,7 +113,9 @@
 			children = (
 				7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */,
 				7A9A02B2296FA775007D5E87 /* ContentView.swift */,
+				7A3377CB297BDE1E00495CE2 /* ColorExtension.swift */,
 				7A9D107629782D4B007EDAAA /* CodeView.swift */,
+				7A3377CD297BE86500495CE2 /* ProgressBar.swift */,
 				7A9D107C29782F2C007EDAAA /* ViewModel */,
 				7AC384902978C3EB00C19993 /* Models */,
 				7A9A02B4296FA776007D5E87 /* Assets.xcassets */,
@@ -296,10 +302,12 @@
 				7A9D107B29782E2C007EDAAA /* TimerViewModel.swift in Sources */,
 				7A9A02BA296FA776007D5E87 /* Persistence.swift in Sources */,
 				7A9A02BD296FA776007D5E87 /* authenticator.xcdatamodeld in Sources */,
+				7A3377CC297BDE1E00495CE2 /* ColorExtension.swift in Sources */,
 				7A9A02B3296FA775007D5E87 /* ContentView.swift in Sources */,
 				7A9D107729782D4B007EDAAA /* CodeView.swift in Sources */,
 				7AC384922978C3FF00C19993 /* TimerModel.swift in Sources */,
 				7A9D107929782DB3007EDAAA /* CodeViewModel.swift in Sources */,
+				7A3377CE297BE86500495CE2 /* ProgressBar.swift in Sources */,
 				7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
