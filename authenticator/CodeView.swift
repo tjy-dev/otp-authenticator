@@ -28,7 +28,11 @@ struct CodeView: View {
                             .foregroundColor(Color(.secondaryLabel))
                     }
                     Spacer()
-                    ProgressBar(height: 30, width: 30, stroke: 7, max: 30, to: $timerModel.model.remainingTime)
+                    ProgressBar(stroke: 6, max: 30, to: $timerModel.model.remainingTime)
+                        .foregroundColor(
+                            Color(.highlightText)
+                        )
+                        .frame(width: 30, height: 30)
                 }
                 Spacer().frame(height: 15)
                 HStack {

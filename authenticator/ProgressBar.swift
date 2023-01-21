@@ -10,8 +10,6 @@ import SwiftUI
 
 struct ProgressBar: View {
     
-    var height: CGFloat = 100
-    var width:  CGFloat = 100
     var stroke: CGFloat = 15
     
     var max: CGFloat = 30
@@ -21,8 +19,7 @@ struct ProgressBar: View {
     
     var body: some View {
         Circle()
-            .fill(Color.clear)
-            .frame(width: height, height: width)
+            .fill(.clear)
             .overlay(
                 Circle()
                     .rotation(Angle(degrees: -90))
@@ -30,9 +27,9 @@ struct ProgressBar: View {
                     .stroke(style: StrokeStyle(
                         lineWidth: stroke,
                         lineCap: .round,
-                        lineJoin:.round
+                        lineJoin: .round
                     ))
-                    .foregroundColor(Color(.highlightText))
+                    
             )
     }
 }
@@ -44,7 +41,8 @@ struct ProgressPreview: PreviewProvider {
     
     static
     var previews: some View {
-        ProgressBar(height: 100, width: 100, stroke: 20, to: $to)
+        ProgressBar(stroke: 20, to: $to)
+            .frame(width: 100, height: 100)
     }
 
 }
