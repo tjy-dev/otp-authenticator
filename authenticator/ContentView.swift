@@ -63,7 +63,7 @@ struct ContentView: View {
         withAnimation {
             let new = CodeItem(context: viewContext)
             new.id = (codeItems.first?.id ?? 0) + 1
-            new.name = "Code View"
+            new.name = "Code View " + String(new.id)
             new.desc = "name@example.com"
             new.key = "123456"
             
