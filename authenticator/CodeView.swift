@@ -30,7 +30,9 @@ struct CodeView: View {
                     Spacer()
                     ProgressBar(stroke: 6, max: 30, to: $timerModel.model.remainingTime)
                         .foregroundColor(
-                            Color(.highlightText)
+                            timerModel.model.remainingTime > 5.0 ?
+                            Color(.highlightText) :
+                                Color(.distructiveText)
                         )
                         .frame(width: 30, height: 30)
                 }
