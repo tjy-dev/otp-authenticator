@@ -26,13 +26,13 @@ struct ProgressBar: View {
             .overlay(
                 Circle()
                     .rotation(Angle(degrees: -90))
-                    .trim(from: 0, to: to)
+                    .trim(from: 0, to: to / max)
                     .stroke(style: StrokeStyle(
                         lineWidth: stroke,
                         lineCap: .round,
                         lineJoin:.round
                     ))
-                    
+                    .foregroundColor(Color(.highlightText))
             )
     }
 }
@@ -40,7 +40,7 @@ struct ProgressBar: View {
 struct ProgressPreview: PreviewProvider {
 
     @State static
-    var to: CGFloat = 0.8
+    var to: CGFloat = 10
     
     static
     var previews: some View {
