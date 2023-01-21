@@ -11,10 +11,8 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CodeItem.id, ascending: false)], animation: .default)
+    private var codeItems: FetchedResults<CodeItem>
 
     @ObservedObject
     var timerModel = TimerViewModel()
@@ -38,8 +36,10 @@ struct ContentView: View {
             GeometryReader { geo in
                 ScrollView {
                     VStack {
-                        CodeView(timerModel: timerModel, codes: $codes)
-                        CodeView(timerModel: timerModel, codes: $codes)
+                        ForEach(codeItems, id: \.id) {
+                            item in
+                            CodeView(timerModel: timerModel, codeItem: item)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .toolbar {
@@ -47,7 +47,7 @@ struct ContentView: View {
                             EditButton()
                         }
                         ToolbarItem {
-                            Button(action: addItem) {
+                            Button(action: addCodeItem) {
                                 Label("Add Item", systemImage: "plus")
                             }
                         }
@@ -58,17 +58,18 @@ struct ContentView: View {
             }
         }
     }
-
-    private func addItem() {
+    
+    private func addCodeItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
+            let new = CodeItem(context: viewContext)
+            new.id = (codeItems.first?.id ?? 0) + 1
+            new.name = "Code View"
+            new.desc = "name@example.com"
+            new.key = "123456"
+            
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -77,13 +78,11 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { codeItems[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }

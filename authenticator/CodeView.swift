@@ -19,9 +19,8 @@ struct CodeView: View {
     @ObservedObject
     var timerModel: TimerViewModel
     
-    @Binding
-    var codes: Array<String>
-    
+    var codeItem: CodeItem
+
     var body: some View {
         HStack {
             VStack {
@@ -29,7 +28,7 @@ struct CodeView: View {
                     VStack(alignment: .leading) {
                         Text("Code View")
                             .font(.avenirBold())
-                        Text(verbatim: "name@example.com")
+                        Text(verbatim: "name@example.com id: \(codeItem.id)")
                             .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
                     }
@@ -40,7 +39,7 @@ struct CodeView: View {
                 }
                 Spacer().frame(height: 15)
                 HStack {
-                    ForEach(codes, id: \.self) { c in
+                    ForEach(Array((codeItem.key?.split(separator: ""))!), id: \.self) { c in
                         Text(c)
                             .forground(timerModel: timerModel)
                             .font(.avenirBold(30))
@@ -65,13 +64,9 @@ struct CodeView_Previews: PreviewProvider {
     @ObservedObject static
     var timerModel = TimerViewModel()
     
-    @State static
-    var codes = ["1", "2", "3", "4", "5", "6"]
-    
     static var previews: some View {
         ScrollView {
-            CodeView(timerModel: timerModel, codes: $codes)
-            CodeView(timerModel: timerModel, codes: $codes)
+            // CodeView(timerModel: timerModel, codes: $codes)
             Spacer()
         }.background(Color(.background))
     }
