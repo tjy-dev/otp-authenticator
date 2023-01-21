@@ -35,22 +35,19 @@ struct CodeView: View {
                     }
                     Spacer()
                     ProgressBar(stroke: 6, max: 30, to: $timerModel.model.remainingTime)
-                        .foregroundColor(
-                            timerModel.model.remainingTime > 5.0 ?
-                            Color(.highlightText) :
-                                Color(.distructiveText)
-                        )
+                        .forground(timerModel: timerModel)
                         .frame(width: 30, height: 30)
                 }
                 Spacer().frame(height: 15)
                 HStack {
                     ForEach(codes, id: \.self) { c in
                         Text(c)
+                            .forground(timerModel: timerModel)
                             .font(
                                 .custom("AvenirNext-DemiBold", size: 30, relativeTo: .title))
                             .frame(width: 40, height: 45)
                             .foregroundColor(Color(.highlightText))
-                            .background(Color(.codeBackground))
+                            .background(timerModel: timerModel)
                             .cornerRadius(10)
                     }
                     Spacer()
