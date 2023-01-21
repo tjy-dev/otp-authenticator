@@ -8,6 +8,16 @@
 import Foundation
 import SwiftUI
 
+/// A custom progress bar view.
+///
+/// - Parameters:
+///    - max: maximum of `to`.
+///    - to: `Binding<CGFloat>` value, end of stoke.
+///    - stroke: width of stroke.
+///
+/// - Precondition:
+///    - `to` must not be empty.
+///
 struct ProgressBar: View {
     
     var stroke: CGFloat = 15
@@ -29,7 +39,6 @@ struct ProgressBar: View {
                         lineCap: .round,
                         lineJoin: .round
                     ))
-                    
             )
     }
 }

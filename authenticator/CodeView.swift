@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+/// This is a code view that displays the account description, OTP code, and remaining time.
+///
+/// - Parameters:
+///    - timerModel: TimerViewModel object for timer data.
+///    - codes: Array of String of codes. e.g. ["1", "2", "3", "4", "5", "6"]
+///
 struct CodeView: View {
     
     @ObservedObject
