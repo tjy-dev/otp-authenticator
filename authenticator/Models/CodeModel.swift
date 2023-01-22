@@ -21,6 +21,10 @@ struct CodeModel {
     init(name: String, desc: String, key: String) {
         self.name = name; self.desc = desc; self.key = key
     }
+
+    init() {
+        self.name = ""; self.desc = ""; self.key = ""
+    }
     
     var name: String
     var desc: String

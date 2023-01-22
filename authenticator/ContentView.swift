@@ -22,6 +22,9 @@ struct ContentView: View {
     @ObservedObject
     var timerModel = TimerViewModel()
     
+    @State private
+    var navPath = NavigationPath()
+    
     init() {
         // set navigatino bar title attributes
         // e.g. custom fonts
@@ -34,7 +37,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navPath) {
             GeometryReader { geo in
                 ScrollView {
                     VStack {
@@ -49,24 +52,34 @@ struct ContentView: View {
                             EditButton()
                         }
                         ToolbarItem {
-                            Button(action: addCodeItem) {
+                            Button(action: {
+                                navPath.append("add_account")
+                            }) {
                                 Label("Add Item", systemImage: "plus")
                             }
                         }
                     }
                 }
+                .navigationDestination(for: String.self, destination: { str in
+                    if str == "add_account" {
+                        AddAccountView(onSave: { m in
+                            addCodeItem(m)
+                            navPath = NavigationPath()
+                        })
+                    }
+                })
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
             }
         }
     }
     
-    private func addCodeItem() {
+    private func addCodeItem(_ m: CodeModel) {
         withAnimation {
             let new = CodeItem(context: viewContext)
             new.id = (codeItems.first?.id ?? 0) + 1
-            new.name = "Code View " + String(new.id)
-            new.desc = "name@example.com"
+            new.name = m.name
+            new.desc = m.desc
             new.key = dummyKey
             
             do {
