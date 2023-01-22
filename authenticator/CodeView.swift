@@ -23,8 +23,6 @@ struct CodeView: View {
 
     var body: some View {
         CodeViewContent(timerModel: timerModel,
-                        name: codeItem.name!,
-                        desc: codeItem.desc!,
-                        code: codeItem.key!)
+                        codeModel: CodeModel(codeItem: codeItem))
     }
 }

@@ -12,29 +12,23 @@ import SwiftUI
 ///
 /// - Parameters:
 ///    - timerModel: TimerViewModel object for timer data.
-///    - name: name of item
-///    - desc: description of item
-///    - code: String of codes. e.g. "123456"
+///    - codeModel: CodeModel object containing attributes.
 ///
 struct CodeViewContent: View {
     
     @ObservedObject
     var timerModel: TimerViewModel
     
-    var name: String
-    
-    var desc: String
-    
-    var code: String
+    var codeModel: CodeModel
 
     var body: some View {
         HStack {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(name)
+                        Text(codeModel.name)
                             .font(.avenirBold())
-                        Text(verbatim: desc)
+                        Text(verbatim: codeModel.desc)
                             .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
                     }
@@ -45,7 +39,7 @@ struct CodeViewContent: View {
                 }
                 Spacer().frame(height: 15)
                 HStack {
-                    ForEach(Array((code.split(separator: ""))), id: \.self) { c in
+                    ForEach(Array((codeModel.code.split(separator: ""))), id: \.self) { c in
                         Text(c)
                             .forground(timerModel: timerModel)
                             .font(.avenirBold(30))
@@ -70,10 +64,15 @@ struct CodeViewContent_Previews: PreviewProvider {
     @ObservedObject static
     var timerModel = TimerViewModel()
     
+    static 
+    var codeModel = CodeModel(name: "Code View",
+                              desc: "name@example.com",
+                              key: "key")
+    
     static var previews: some View {
         ScrollView {
-            CodeViewContent(timerModel: timerModel, name: "Code View", desc: "name@example.com", code: "123456")
-            CodeViewContent(timerModel: timerModel, name: "Code View", desc: "name@example.com", code: "123456")
+            CodeViewContent(timerModel: timerModel, codeModel: codeModel)
+            CodeViewContent(timerModel: timerModel, codeModel: codeModel)
             Spacer()
         }.background(Color(.background))
     }
