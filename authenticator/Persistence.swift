@@ -35,6 +35,8 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "authenticator")
+        container.persistentStoreDescriptions.first!.setOption(FileProtectionType.complete as NSObject,
+                                                               forKey: NSPersistentStoreFileProtectionKey)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
