@@ -52,9 +52,13 @@ struct ContentView: View {
                             EditButton()
                         }
                         ToolbarItem {
-                            Button(action: {
-                                navPath.append("add_account")
-                            }) {
+                            Menu {
+                                Button(action: {
+                                    navPath.append("add_account")
+                                }) {
+                                    Label("Enter setupkey", systemImage: "keyboard")
+                                }
+                            } label: {
                                 Label("Add Item", systemImage: "plus")
                             }
                         }
