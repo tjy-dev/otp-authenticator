@@ -8,6 +8,11 @@
 import SwiftUI
 import CoreData
 
+/// Dummy key from
+/// https://github.com/google/google-authenticator/wiki/Key-Uri-Format
+/// check for more details.
+let dummyKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -62,7 +67,7 @@ struct ContentView: View {
             new.id = (codeItems.first?.id ?? 0) + 1
             new.name = "Code View " + String(new.id)
             new.desc = "name@example.com"
-            new.key = "123456"
+            new.key = dummyKey
             
             do {
                 try viewContext.save()

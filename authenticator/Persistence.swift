@@ -18,7 +18,7 @@ struct PersistenceController {
             new.id = Int64(i)
             new.name = "Code View " + String(new.id)
             new.desc = "name@example.com"
-            new.key = "123456"
+            new.key = dummyKey
         }
         do {
             try viewContext.save()

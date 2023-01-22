@@ -64,10 +64,10 @@ struct CodeViewContent_Previews: PreviewProvider {
     @ObservedObject static
     var timerModel = TimerViewModel()
     
-    static 
+    static
     var codeModel = CodeModel(name: "Code View",
                               desc: "name@example.com",
-                              key: "key")
+                              key: dummyKey)
     
     static var previews: some View {
         ScrollView {
