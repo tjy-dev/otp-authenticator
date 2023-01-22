@@ -17,9 +17,6 @@ struct ContentView: View {
     @ObservedObject
     var timerModel = TimerViewModel()
     
-    @State
-    var codes = ["1", "2", "3", "4", "5", "6"]
-    
     init() {
         // set navigatino bar title attributes
         // e.g. custom fonts
