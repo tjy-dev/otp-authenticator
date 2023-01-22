@@ -26,6 +26,14 @@ struct CodeModel {
         self.name = ""; self.desc = ""; self.key = ""
     }
     
+    var isDisabled: Bool {
+        get {
+            name.isEmpty ||
+            desc.isEmpty ||
+            key.isEmpty
+        }
+    }
+    
     var name: String
     var desc: String
     var key : String

@@ -27,7 +27,7 @@ struct AddAccountView: View {
                 ToolbarItem {
                     Button(action: save) {
                         Text("Save")
-                    }
+                    }.disabled(model.isDisabled)
                 }
             }
             // clear the background color
