@@ -8,27 +8,40 @@
 import SwiftUI
 import CoreData
 
+/// Dummy key from
+/// https://github.com/google/google-authenticator/wiki/Key-Uri-Format
+/// check for more details.
+let dummyKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CodeItem.id, ascending: false)], animation: .default)
+    private var codeItems: FetchedResults<CodeItem>
 
     @ObservedObject
     var timerModel = TimerViewModel()
     
-    @State
-    var codes = ["1", "2", "3", "4", "5", "6"]
+    init() {
+        // set navigatino bar title attributes
+        // e.g. custom fonts
+        UINavigationBar.appearance().titleTextAttributes = [
+            .font: UIFont.avenirDemiBold(20)
+        ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .font: UIFont.avenirBold(30)
+        ]
+    }
     
     var body: some View {
         NavigationView {
             GeometryReader { geo in
                 ScrollView {
                     VStack {
-                        CodeView(timerModel: timerModel, codes: $codes)
-                        CodeView(timerModel: timerModel, codes: $codes)
+                        ForEach(codeItems, id: \.id) {
+                            item in
+                            CodeView(timerModel: timerModel, codeItem: item)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .toolbar {
@@ -36,27 +49,29 @@ struct ContentView: View {
                             EditButton()
                         }
                         ToolbarItem {
-                            Button(action: addItem) {
+                            Button(action: addCodeItem) {
                                 Label("Add Item", systemImage: "plus")
                             }
                         }
                     }
                 }
+                .navigationTitle("Authenticator")
                 .background(Color(.background))
             }
         }
     }
-
-    private func addItem() {
+    
+    private func addCodeItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
+            let new = CodeItem(context: viewContext)
+            new.id = (codeItems.first?.id ?? 0) + 1
+            new.name = "Code View " + String(new.id)
+            new.desc = "name@example.com"
+            new.key = dummyKey
+            
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -65,13 +80,11 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { codeItems[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }

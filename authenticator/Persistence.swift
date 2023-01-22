@@ -13,9 +13,12 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for i in 1..<3 {
+            let new = CodeItem(context: viewContext)
+            new.id = Int64(i)
+            new.name = "Code View " + String(new.id)
+            new.desc = "name@example.com"
+            new.key = dummyKey
         }
         do {
             try viewContext.save()
@@ -32,6 +35,8 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "authenticator")
+        container.persistentStoreDescriptions.first!.setOption(FileProtectionType.complete as NSObject,
+                                                               forKey: NSPersistentStoreFileProtectionKey)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

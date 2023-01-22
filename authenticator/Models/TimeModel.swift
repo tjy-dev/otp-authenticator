@@ -30,7 +30,7 @@ struct TimeModel {
         let date = Date.now
         let unixTime: TimeInterval = date.timeIntervalSince1970
         let unixTimeInt = Int(unixTime)
-        return (30 - unixTimeInt % 30)
+        return (29 - unixTimeInt % 30)
     }
 
     /// Decrease the remaining time by 1 sec.
