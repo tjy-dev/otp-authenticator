@@ -36,19 +36,29 @@ struct CodeView: View {
                             .foregroundColor(Color(.secondaryLabel))
                     }
                     Spacer()
-                    ProgressBar(stroke: 6, max: 30, to: $timerModel.model.remainingTime)
-                        .forground(timerModel: timerModel)
-                        .frame(width: 30, height: 30)
+                    if isEditing {
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 20, weight: .bold))
+                    } else {
+                        ProgressBar(stroke: 6,
+                                    max: 30,
+                                    to: $timerModel.model.remainingTime)
+                            .forground(timerModel: timerModel)
+                            .frame(width: 30, height: 30)
+                    }
                 }
                 Spacer().frame(height: 15)
                 HStack {
-                    ForEach(isEditing ? codeModel.dummyCode : codeModel.codeArray,  id: \.self) { c in
+                    ForEach(isEditing ?
+                            codeModel.dummyCode :
+                            codeModel.codeArray,
+                            id: \.self) { c in
                         Text(c)
-                            .forground(timerModel: timerModel)
+                            .forground(timerModel: timerModel, isEditing: isEditing)
                             .font(.avenirBold(30))
                             .frame(width: 40, height: 45)
                             .foregroundColor(Color(.highlightText))
-                            .background(timerModel: timerModel)
+                            .background(timerModel: timerModel, isEditing: isEditing)
                             .cornerRadius(10)
                     }
                     Spacer()
@@ -73,12 +83,15 @@ struct CodeViewContent_Previews: PreviewProvider {
                               key: dummyKey)
     
     @State static
-    var isEditing = false
+    var isEditing = true
     
+    @State static
+    var isNotEditing = false
+
     static var previews: some View {
         ScrollView {
             CodeView(timerModel: timerModel, codeModel: codeModel, isEditing: $isEditing)
-            CodeView(timerModel: timerModel, codeModel: codeModel, isEditing: $isEditing)
+            CodeView(timerModel: timerModel, codeModel: codeModel, isEditing: $isNotEditing)
             Spacer()
         }.background(Color(.background))
     }

@@ -15,7 +15,6 @@
 		7A3377D0297C170A00495CE2 /* CodeColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CF297C170A00495CE2 /* CodeColorModifier.swift */; };
 		7A3377D4297CA01900495CE2 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377D3297CA01900495CE2 /* UIFontExtension.swift */; };
 		7A3377D6297CA03C00495CE2 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377D5297CA03C00495CE2 /* FontExtension.swift */; };
-		7A3D98B5297CB13D0054776C /* CodeViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3D98B4297CB13D0054776C /* CodeViewContent.swift */; };
 		7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */; };
 		7A9A02B3296FA775007D5E87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B2296FA775007D5E87 /* ContentView.swift */; };
 		7A9A02B5296FA776007D5E87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9A02B4296FA776007D5E87 /* Assets.xcassets */; };
@@ -62,7 +61,6 @@
 		7A3377CF297C170A00495CE2 /* CodeColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeColorModifier.swift; sourceTree = "<group>"; };
 		7A3377D3297CA01900495CE2 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		7A3377D5297CA03C00495CE2 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
-		7A3D98B4297CB13D0054776C /* CodeViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewContent.swift; sourceTree = "<group>"; };
 		7A9A02AD296FA775007D5E87 /* authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticatorApp.swift; sourceTree = "<group>"; };
 		7A9A02B2296FA775007D5E87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 				7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */,
 				7A9A02B2296FA775007D5E87 /* ContentView.swift */,
 				7A9D107629782D4B007EDAAA /* CodeView.swift */,
-				7A3D98B4297CB13D0054776C /* CodeViewContent.swift */,
 				7A0F558B297CCDAF00F5113B /* AddAccountView.swift */,
 				7A3377CD297BE86500495CE2 /* ProgressBar.swift */,
 				7A3377D2297C19CD00495CE2 /* Extensions */,
@@ -492,7 +489,6 @@
 				7A3377D4297CA01900495CE2 /* UIFontExtension.swift in Sources */,
 				7A3377D6297CA03C00495CE2 /* FontExtension.swift in Sources */,
 				7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */,
-				7A3D98B5297CB13D0054776C /* CodeViewContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
