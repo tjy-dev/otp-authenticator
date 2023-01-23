@@ -19,6 +19,10 @@ struct ContentView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CodeItem.id, ascending: false)], animation: .default)
     private var codeItems: FetchedResults<CodeItem>
 
+    // set editmode
+    @State
+    var isEditing: Bool = false
+
     @ObservedObject
     var timerModel = TimerViewModel()
     
@@ -43,13 +47,23 @@ struct ContentView: View {
                     VStack {
                         ForEach(codeItems, id: \.id) {
                             item in
-                            CodeView(timerModel: timerModel, codeItem: item)
+                            CodeView(timerModel: timerModel,
+                                     codeModel: CodeModel(codeItem: item),
+                                     isEditing: $isEditing)
+                            .onTapGesture {
+                                if isEditing {
+                                    navPath.append(item.id)
+                                    isEditing = false
+                                }
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            EditButton()
+                            Button(isEditing ? "Done" : "Edit") {
+                                isEditing.toggle()
+                            }
                         }
                         ToolbarItem {
                             Menu {
@@ -72,8 +86,34 @@ struct ContentView: View {
                         })
                     }
                 })
+                .navigationDestination(for: Int64.self, destination: { id in
+                    AddAccountView(model: CodeModel(codeItem: codeItems.filter({ item in
+                        item.id == id
+                    }).first!), onSave: { m in
+                        editCodeItem(m, id: id)
+                        navPath = NavigationPath()
+                    })
+                })
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
+            }
+        }
+    }
+    
+    private func editCodeItem(_ m: CodeModel, id: Int64) {
+        withAnimation {
+            let item = codeItems.filter { item in
+                item.id == id
+            }.first!
+            item.name = m.name
+            item.desc = m.desc
+            item.key = m.key
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }

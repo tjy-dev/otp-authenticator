@@ -74,5 +74,15 @@ struct CodeModel {
             OtpCodeModel.computeCode(key: key)
         }
     }
+    var codeArray: Array<Substring> {
+        get {
+            Array((code.split(separator: "")))
+        }
+    }
+    var dummyCode: Array<Substring> {
+        get {
+            ["•", "•", "•", "•", "•", "•"]
+        }
+    }
     
 }
