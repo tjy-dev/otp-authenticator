@@ -51,7 +51,7 @@ struct CodeTextModifier: ViewModifier {
                 Color(.secondaryLabel) :
                     timerModel.model.remainingTime > 5.0 ?
                         Color(.highlightText) :
-                        Color(.distructiveText)
+                        Color(.destructiveText)
             )
     }
 }
@@ -77,7 +77,7 @@ struct CodeBackgroundModifier: ViewModifier {
                 Color(.secondarySystemBackground) :
                     timerModel.model.remainingTime > 5.0 ?
                         Color(.codeBackground) :
-                        Color(.distructiveBackground)
+                        Color(.destructiveBackground)
             )
     }
 }
