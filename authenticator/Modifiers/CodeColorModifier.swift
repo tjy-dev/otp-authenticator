@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 
+/// View extension for code color modifiers
+/// Because sometimes isEditing is always false,
+/// there are some of the extension for that.
 extension View {
     func background(timerModel: TimerViewModel) -> some View {
         self.modifier(CodeBackgroundModifier(timerModel: timerModel, isEditing: false))
@@ -27,7 +30,13 @@ extension View {
     }
 }
 
-
+/// modifier for forground
+/// Because this set is used for most of the forground of the content
+///
+/// - Parameters:
+///    - timermodel: TimerModel object
+///    - isEditing: to idsable the color or not
+///    
 struct CodeTextModifier: ViewModifier {
     
     @ObservedObject
@@ -47,7 +56,13 @@ struct CodeTextModifier: ViewModifier {
     }
 }
 
-
+/// Modifier for background
+/// Because this set is used for most of the background of the content
+///
+/// - Parameters:
+///    - timermodel: TimerModel object
+///    - isEditing: to idsable the color or not
+///
 struct CodeBackgroundModifier: ViewModifier {
     
     @ObservedObject

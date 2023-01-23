@@ -10,8 +10,18 @@ import CoreData
 import SwiftBase32
 import CryptoSwift
 
-struct OtpCodeModel {
+
+/// OTP code generator
+/// Only has static method because there is no use of an instance
+struct OTPCodeGenerator {
     
+    /// Compute OTP code
+    ///
+    /// - Parameters:
+    ///    - key: string key
+    ///
+    /// - Returns: String code of 6 digits e.g. "000000"
+    ///
     static
     func computeCode (key: String) -> String {
         guard let key = base32Decode(key.replacingOccurrences(of: " ", with: "")) else {
@@ -42,6 +52,14 @@ struct OtpCodeModel {
     }
 }
 
+
+/// Code model containing account information
+///
+/// - Parameters:
+///    - name: name of account
+///    - desc: description
+///    - key: key for the account
+///
 struct CodeModel {
     
     init(codeItem: CodeItem) {
@@ -58,6 +76,7 @@ struct CodeModel {
         self.name = ""; self.desc = ""; self.key = ""
     }
     
+    // For code validation
     var isDisabled: Bool {
         get {
             name.isEmpty ||
@@ -69,16 +88,23 @@ struct CodeModel {
     var name: String
     var desc: String
     var key : String
+    
+    // Generated code from self.key (computed)
     var code: String {
         get {
-            OtpCodeModel.computeCode(key: key)
+            OTPCodeGenerator.computeCode(key: key)
         }
     }
+    
+    // Code string split in to substring array
     var codeArray: Array<Substring> {
         get {
             Array((code.split(separator: "")))
         }
     }
+    
+    // Dummy code for isEditing mode
+    // is Substring to match codeArray
     var dummyCode: Array<Substring> {
         get {
             ["•", "•", "•", "•", "•", "•"]
