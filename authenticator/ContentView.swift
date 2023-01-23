@@ -16,15 +16,15 @@ let dummyKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \CodeItem.id, ascending: false)], animation: .default)
-    private var codeItems: FetchedResults<CodeItem>
-
     // set editmode
     @State
     var isEditing: Bool = false
 
     @ObservedObject
     var timerModel = TimerViewModel()
+    
+    @ObservedObject
+    var codeViewModel = CodeDataViewModel()
     
     @State private
     var navPath = NavigationPath()
@@ -45,7 +45,7 @@ struct ContentView: View {
             GeometryReader { geo in
                 ScrollView {
                     VStack {
-                        ForEach(codeItems, id: \.id) {
+                        ForEach(codeViewModel.items, id: \.id) {
                             item in
                             CodeView(timerModel: timerModel,
                                      codeModel: CodeModel(codeItem: item),
@@ -74,6 +74,9 @@ struct ContentView: View {
                                 }) {
                                     Label("Enter setupkey", systemImage: "keyboard")
                                 }
+                                Button("Add dummy") {
+                                    codeViewModel.addCodeItem(CodeModel(name: "Name", desc: "name@example.com", key: dummyKey))
+                                }
                             } label: {
                                 Label("Add Item", systemImage: "plus")
                             }
@@ -83,20 +86,22 @@ struct ContentView: View {
                 .navigationDestination(for: String.self, destination: { str in
                     if str == "add_account" {
                         AddAccountView { m in
-                            addCodeItem(m)
+                            codeViewModel.addCodeItem(m)
                             navPath = NavigationPath()
                         }
                     }
                 })
                 .navigationDestination(for: Int64.self, destination: { id in
-                    AddAccountView(model: CodeModel(codeItem: codeItems.filter({ item in
+                    if let first = codeViewModel.items.filter({ item in
                         item.id == id
-                    }).first!)) { m in
-                        editCodeItem(m, id: id)
-                        navPath = NavigationPath()
-                    } onDelete: {
-                        deleteItem(id: id)
-                        navPath = NavigationPath()
+                    }).first {
+                        AddAccountView(model: CodeModel(codeItem: first)) { m in
+                            codeViewModel.editCodeItem(m, id: id)
+                            navPath = NavigationPath()
+                        } onDelete: {
+                            codeViewModel.deleteItem(id: id)
+                            navPath = NavigationPath()
+                        }
                     }
                 })
                 .onAppear {
@@ -104,69 +109,6 @@ struct ContentView: View {
                 }
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
-            }
-        }
-    }
-    
-    private func deleteItem(id: Int64) {
-        withAnimation {
-            let item = codeItems.filter { item in
-                item.id == id
-            }.first!
-            viewContext.delete(item)
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func editCodeItem(_ m: CodeModel, id: Int64) {
-        withAnimation {
-            let item = codeItems.filter { item in
-                item.id == id
-            }.first!
-            item.name = m.name
-            item.desc = m.desc
-            item.key = m.key
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func addCodeItem(_ m: CodeModel) {
-        withAnimation {
-            let new = CodeItem(context: viewContext)
-            new.id = (codeItems.first?.id ?? 0) + 1
-            new.name = m.name
-            new.desc = m.desc
-            new.key = m.key
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { codeItems[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
