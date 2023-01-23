@@ -23,7 +23,7 @@ struct OTPCodeGenerator {
     /// - Returns: String code of 6 digits e.g. "000000"
     ///
     static
-    func computeCode (key: String) -> String {
+    func generate (key: String) -> String {
         guard let key = base32Decode(key.replacingOccurrences(of: " ", with: "")) else {
             return "Error!"
         }
@@ -92,7 +92,7 @@ struct CodeModel {
     // Generated code from self.key (computed)
     var code: String {
         get {
-            OTPCodeGenerator.computeCode(key: key)
+            OTPCodeGenerator.generate(key: key)
         }
     }
     

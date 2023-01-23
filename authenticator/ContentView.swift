@@ -54,7 +54,7 @@ struct ContentView: View {
                                 if isEditing {
                                     navPath.append(item.id)
                                 } else {
-                                    let code = OTPCodeGenerator.computeCode(key: item.key!)
+                                    let code = OTPCodeGenerator.generate(key: item.key!)
                                     UIPasteboard.general.string = code
                                 }
                             }
