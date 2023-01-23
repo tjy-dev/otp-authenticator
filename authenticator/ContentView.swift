@@ -54,6 +54,9 @@ struct ContentView: View {
                                 if isEditing {
                                     navPath.append(item.id)
                                     isEditing = false
+                                } else {
+                                    let code = OTPCodeGenerator.computeCode(key: item.key!)
+                                    UIPasteboard.general.string = code
                                 }
                             }
                         }
@@ -92,10 +95,28 @@ struct ContentView: View {
                     }).first!), onSave: { m in
                         editCodeItem(m, id: id)
                         navPath = NavigationPath()
+                    }, onDelete: {
+                        deleteItem(id: id)
+                        navPath = NavigationPath()
                     })
                 })
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
+            }
+        }
+    }
+    
+    private func deleteItem(id: Int64) {
+        withAnimation {
+            let item = codeItems.filter { item in
+                item.id == id
+            }.first!
+            viewContext.delete(item)
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
