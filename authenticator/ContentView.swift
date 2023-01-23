@@ -84,7 +84,7 @@ struct ContentView: View {
             new.id = (codeItems.first?.id ?? 0) + 1
             new.name = m.name
             new.desc = m.desc
-            new.key = dummyKey
+            new.key = m.key
             
             do {
                 try viewContext.save()
