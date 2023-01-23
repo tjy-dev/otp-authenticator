@@ -21,6 +21,9 @@ struct AddAccountView: View {
             Form {
                 TextField("Account", text: $model.name)
                 TextField("Description", text: $model.desc)
+                    .keyboardType(.emailAddress)
+                    .autocorrectionDisabled(true)
+                    .textInputAutocapitalization(TextInputAutocapitalization(.none))
                 TextField("Key", text: $model.key)
             }
             .toolbar {
