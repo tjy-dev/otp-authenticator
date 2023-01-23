@@ -82,22 +82,22 @@ struct ContentView: View {
                 }
                 .navigationDestination(for: String.self, destination: { str in
                     if str == "add_account" {
-                        AddAccountView(onSave: { m in
+                        AddAccountView { m in
                             addCodeItem(m)
                             navPath = NavigationPath()
-                        })
+                        }
                     }
                 })
                 .navigationDestination(for: Int64.self, destination: { id in
                     AddAccountView(model: CodeModel(codeItem: codeItems.filter({ item in
                         item.id == id
-                    }).first!), onSave: { m in
+                    }).first!)) { m in
                         editCodeItem(m, id: id)
                         navPath = NavigationPath()
-                    }, onDelete: {
+                    } onDelete: {
                         deleteItem(id: id)
                         navPath = NavigationPath()
-                    })
+                    }
                 })
                 .onAppear {
                     isEditing = false
