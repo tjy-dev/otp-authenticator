@@ -53,7 +53,6 @@ struct ContentView: View {
                             .onTapGesture {
                                 if isEditing {
                                     navPath.append(item.id)
-                                    isEditing = false
                                 } else {
                                     let code = OTPCodeGenerator.computeCode(key: item.key!)
                                     UIPasteboard.general.string = code
@@ -100,6 +99,9 @@ struct ContentView: View {
                         navPath = NavigationPath()
                     })
                 })
+                .onAppear {
+                    isEditing = false
+                }
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
             }
