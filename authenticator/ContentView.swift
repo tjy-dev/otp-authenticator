@@ -48,13 +48,13 @@ struct ContentView: View {
                 ScrollView {
                     ForEach(codeViewModel.items, id: \.id) { item in
                         CodeView(timerModel: timerModel,
-                                 codeModel: CodeModel(codeItem: item),
+                                 codeModel: item,
                                  isEditing: $isEditing)
                         .onTapGesture {
                             if isEditing {
                                 navPath.append(item.id)
                             } else {
-                                let code = OTPCodeGenerator.generate(key: item.key!)
+                                let code = OTPCodeGenerator.generate(key: item.key)
                                 UIPasteboard.general.string = code
                             }
                         }
@@ -97,7 +97,7 @@ struct ContentView: View {
                 })
                 .navigationDestination(for: Int64.self, destination: { id in
                     if let item = codeViewModel.items.filter({ $0.id == id }).first {
-                        AddAccountView(model: CodeModel(codeItem: item)) { model in
+                        AddAccountView(model: item) { model in
                             codeViewModel.edit(model, id: id)
                             navPath = NavigationPath()
                         } onDelete: {

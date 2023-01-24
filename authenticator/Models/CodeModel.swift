@@ -60,20 +60,21 @@ struct OTPCodeGenerator {
 ///    - desc: description
 ///    - key: key for the account
 ///
-struct CodeModel {
+struct CodeModel: Identifiable, Equatable {
     
     init(codeItem: CodeItem) {
         self.name = codeItem.name ?? ""
         self.desc = codeItem.desc ?? ""
         self.key  = codeItem.key ?? ""
+        self.id = codeItem.id
     }
     
     init(name: String, desc: String, key: String) {
-        self.name = name; self.desc = desc; self.key = key
+        self.name = name; self.desc = desc; self.key = key; self.id = -1
     }
 
     init() {
-        self.name = ""; self.desc = ""; self.key = ""
+        self.name = ""; self.desc = ""; self.key = ""; self.id = -1
     }
     
     // Initialize static dummy
@@ -91,6 +92,7 @@ struct CodeModel {
         }
     }
     
+    var id: Int64
     var name: String
     var desc: String
     var key : String
