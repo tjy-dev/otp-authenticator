@@ -67,7 +67,7 @@ struct ContentView: View {
                                 self.selected = item
                                 return NSItemProvider(object: String(item.id) as NSString)
                             }
-                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, codeViewModel: codeViewModel))
+                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected))
                             .animation(.easeInOut, value: codeViewModel.items)
                         }
                     }

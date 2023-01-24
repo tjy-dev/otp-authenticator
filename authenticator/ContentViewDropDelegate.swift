@@ -12,9 +12,6 @@ struct ContentViewDropDelegate: DropDelegate {
     let item: CodeModel
     @Binding var listData: [CodeModel]
     @Binding var current: CodeModel?
-    
-    @ObservedObject
-    var codeViewModel: CodeDataViewModel
 
     func dropEntered(info: DropInfo) {
         if item != current {
