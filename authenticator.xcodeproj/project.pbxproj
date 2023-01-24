@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		3226DF7298E8ADC8B8F6FE17 /* Pods_authenticator_authenticatorUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06429EF812628CC9223F4B31 /* Pods_authenticator_authenticatorUITests.framework */; };
 		4CC0E0E5DC68338ABF113345 /* Pods_authenticator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C4F2DBCCBC3E90B26FECA8 /* Pods_authenticator.framework */; };
+		7A0F558C297CCDAF00F5113B /* AddAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F558B297CCDAF00F5113B /* AddAccountView.swift */; };
+		7A0F558E297E360700F5113B /* CodeDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F558D297E360700F5113B /* CodeDataViewModel.swift */; };
+		7A0F5590297E37B500F5113B /* CoreDataCodeItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0F558F297E37B500F5113B /* CoreDataCodeItemModel.swift */; };
 		7A3377CC297BDE1E00495CE2 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CB297BDE1E00495CE2 /* ColorExtension.swift */; };
 		7A3377CE297BE86500495CE2 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CD297BE86500495CE2 /* ProgressBar.swift */; };
 		7A3377D0297C170A00495CE2 /* CodeColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377CF297C170A00495CE2 /* CodeColorModifier.swift */; };
 		7A3377D4297CA01900495CE2 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377D3297CA01900495CE2 /* UIFontExtension.swift */; };
 		7A3377D6297CA03C00495CE2 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3377D5297CA03C00495CE2 /* FontExtension.swift */; };
-		7A3D98B5297CB13D0054776C /* CodeViewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3D98B4297CB13D0054776C /* CodeViewContent.swift */; };
 		7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */; };
 		7A9A02B3296FA775007D5E87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9A02B2296FA775007D5E87 /* ContentView.swift */; };
 		7A9A02B5296FA776007D5E87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9A02B4296FA776007D5E87 /* Assets.xcassets */; };
@@ -55,12 +57,14 @@
 		4ACF2986E5510D5F00282937 /* Pods-authenticatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-authenticatorTests.release.xcconfig"; path = "Target Support Files/Pods-authenticatorTests/Pods-authenticatorTests.release.xcconfig"; sourceTree = "<group>"; };
 		52C4F2DBCCBC3E90B26FECA8 /* Pods_authenticator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_authenticator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79AA83C6356D790165C7C0EF /* Pods_authenticatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_authenticatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A0F558B297CCDAF00F5113B /* AddAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountView.swift; sourceTree = "<group>"; };
+		7A0F558D297E360700F5113B /* CodeDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDataViewModel.swift; sourceTree = "<group>"; };
+		7A0F558F297E37B500F5113B /* CoreDataCodeItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCodeItemModel.swift; sourceTree = "<group>"; };
 		7A3377CB297BDE1E00495CE2 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		7A3377CD297BE86500495CE2 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		7A3377CF297C170A00495CE2 /* CodeColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeColorModifier.swift; sourceTree = "<group>"; };
 		7A3377D3297CA01900495CE2 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		7A3377D5297CA03C00495CE2 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
-		7A3D98B4297CB13D0054776C /* CodeViewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeViewContent.swift; sourceTree = "<group>"; };
 		7A9A02AD296FA775007D5E87 /* authenticator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = authenticator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticatorApp.swift; sourceTree = "<group>"; };
 		7A9A02B2296FA775007D5E87 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -167,7 +171,7 @@
 				7A9A02B0296FA775007D5E87 /* authenticatorApp.swift */,
 				7A9A02B2296FA775007D5E87 /* ContentView.swift */,
 				7A9D107629782D4B007EDAAA /* CodeView.swift */,
-				7A3D98B4297CB13D0054776C /* CodeViewContent.swift */,
+				7A0F558B297CCDAF00F5113B /* AddAccountView.swift */,
 				7A3377CD297BE86500495CE2 /* ProgressBar.swift */,
 				7A3377D2297C19CD00495CE2 /* Extensions */,
 				7A3377D1297C19B500495CE2 /* Modifiers */,
@@ -210,6 +214,7 @@
 		7A9D107C29782F2C007EDAAA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7A0F558D297E360700F5113B /* CodeDataViewModel.swift */,
 				7A9D107A29782E2C007EDAAA /* TimerViewModel.swift */,
 			);
 			path = ViewModel;
@@ -219,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				7A9D107829782DB3007EDAAA /* CodeModel.swift */,
+				7A0F558F297E37B500F5113B /* CoreDataCodeItemModel.swift */,
 				7AC384912978C3FF00C19993 /* TimeModel.swift */,
 			);
 			path = Models;
@@ -234,7 +240,6 @@
 				BBED22893324C18C071C6D69 /* Pods-authenticatorTests.debug.xcconfig */,
 				4ACF2986E5510D5F00282937 /* Pods-authenticatorTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -477,7 +482,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9D107B29782E2C007EDAAA /* TimerViewModel.swift in Sources */,
+				7A0F5590297E37B500F5113B /* CoreDataCodeItemModel.swift in Sources */,
 				7A9A02BA296FA776007D5E87 /* Persistence.swift in Sources */,
+				7A0F558C297CCDAF00F5113B /* AddAccountView.swift in Sources */,
 				7A3377D0297C170A00495CE2 /* CodeColorModifier.swift in Sources */,
 				7A9A02BD296FA776007D5E87 /* authenticator.xcdatamodeld in Sources */,
 				7A3377CC297BDE1E00495CE2 /* ColorExtension.swift in Sources */,
@@ -485,11 +492,11 @@
 				7A9D107729782D4B007EDAAA /* CodeView.swift in Sources */,
 				7AC384922978C3FF00C19993 /* TimeModel.swift in Sources */,
 				7A9D107929782DB3007EDAAA /* CodeModel.swift in Sources */,
+				7A0F558E297E360700F5113B /* CodeDataViewModel.swift in Sources */,
 				7A3377CE297BE86500495CE2 /* ProgressBar.swift in Sources */,
 				7A3377D4297CA01900495CE2 /* UIFontExtension.swift in Sources */,
 				7A3377D6297CA03C00495CE2 /* FontExtension.swift in Sources */,
 				7A9A02B1296FA775007D5E87 /* authenticatorApp.swift in Sources */,
-				7A3D98B5297CB13D0054776C /* CodeViewContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

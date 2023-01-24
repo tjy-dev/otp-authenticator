@@ -73,7 +73,7 @@ extension UIColor {
         }
     }
     
-    class var distructiveText : UIColor {
+    class var destructiveText : UIColor {
         get {
             .init(dynamicProvider: { (traitCollection) -> UIColor in
                 switch traitCollection.userInterfaceStyle {
@@ -105,7 +105,7 @@ extension UIColor {
         }
     }
     
-    class var distructiveBackground : UIColor {
+    class var destructiveBackground : UIColor {
         get {
             .init(dynamicProvider: { (traitCollection) -> UIColor in
                 switch traitCollection.userInterfaceStyle {
