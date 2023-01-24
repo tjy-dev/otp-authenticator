@@ -52,7 +52,7 @@ struct CodeView: View {
                     ForEach(isEditing ?
                             codeModel.dummyCode :
                             codeModel.codeArray,
-                            id: \.self) { c in
+                            id: \.self.uuid) { c in
                         Text(c)
                             .forground(timerModel: timerModel, isEditing: isEditing)
                             .font(.avenirBold(30))
