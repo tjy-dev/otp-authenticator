@@ -18,6 +18,7 @@ struct AddAccountView: View {
     
     var onDelete: (() -> ())?
     
+    // alert presentation
     @State
     var isPresented = false
 

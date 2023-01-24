@@ -8,9 +8,9 @@
 import SwiftUI
 import CoreData
 
-/// Dummy key from
-/// https://github.com/google/google-authenticator/wiki/Key-Uri-Format
-/// check for more details.
+// Dummy key from
+// - https://github.com/google/google-authenticator/wiki/Key-Uri-Format
+// Check link for more details.
 let dummyKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"
 
 struct ContentView: View {
@@ -46,19 +46,16 @@ struct ContentView: View {
         NavigationStack(path: $navPath) {
             GeometryReader { geo in
                 ScrollView {
-                    VStack {
-                        ForEach(codeViewModel.items, id: \.id) {
-                            item in
-                            CodeView(timerModel: timerModel,
-                                     codeModel: CodeModel(codeItem: item),
-                                     isEditing: $isEditing)
-                            .onTapGesture {
-                                if isEditing {
-                                    navPath.append(item.id)
-                                } else {
-                                    let code = OTPCodeGenerator.generate(key: item.key!)
-                                    UIPasteboard.general.string = code
-                                }
+                    ForEach(codeViewModel.items, id: \.id) { item in
+                        CodeView(timerModel: timerModel,
+                                 codeModel: CodeModel(codeItem: item),
+                                 isEditing: $isEditing)
+                        .onTapGesture {
+                            if isEditing {
+                                navPath.append(item.id)
+                            } else {
+                                let code = OTPCodeGenerator.generate(key: item.key!)
+                                UIPasteboard.general.string = code
                             }
                         }
                     }
@@ -70,22 +67,19 @@ struct ContentView: View {
                                 isEditing.toggle()
                             }
                         }
+#if DEBUG
+                        ToolbarItem {
+                            Button("Dummy") {
+                                codeViewModel.add(CodeModel.dummy)
+                            }
+                        }
+#endif
                         ToolbarItem {
                             Menu {
-                                Button(action: {
+                                Button {
                                     navPath.append("add_account")
-                                }) {
+                                } label: {
                                     Label("Enter setupkey", systemImage: "keyboard")
-                                }
-                                Button("Add dummy") {
-                                    for _ in 0...5 {
-                                        codeViewModel
-                                            .addCodeItem(
-                                                CodeModel(name: "Name",
-                                                          desc: "name@example.com",
-                                                          key: dummyKey)
-                                            )
-                                    }
                                 }
                             } label: {
                                 Label("Add Item", systemImage: "plus")
@@ -95,28 +89,24 @@ struct ContentView: View {
                 }
                 .navigationDestination(for: String.self, destination: { str in
                     if str == "add_account" {
-                        AddAccountView { m in
-                            codeViewModel.addCodeItem(m)
+                        AddAccountView { model in
+                            codeViewModel.add(model)
                             navPath = NavigationPath()
                         }
                     }
                 })
                 .navigationDestination(for: Int64.self, destination: { id in
-                    if let first = codeViewModel.items.filter({ item in
-                        item.id == id
-                    }).first {
-                        AddAccountView(model: CodeModel(codeItem: first)) { m in
-                            codeViewModel.editCodeItem(m, id: id)
+                    if let item = codeViewModel.items.filter({ $0.id == id }).first {
+                        AddAccountView(model: CodeModel(codeItem: item)) { model in
+                            codeViewModel.edit(model, id: id)
                             navPath = NavigationPath()
                         } onDelete: {
-                            codeViewModel.deleteItem(id: id)
+                            codeViewModel.delete(id: id)
                             navPath = NavigationPath()
                         }
                     }
                 })
-                .onAppear {
-                    isEditing = false
-                }
+                .onAppear { isEditing = false }
                 .navigationTitle("Authenticator")
                 .background(Color(.background))
             }

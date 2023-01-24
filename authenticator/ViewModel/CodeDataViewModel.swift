@@ -15,18 +15,18 @@ class CodeDataViewModel: ObservableObject {
         items = CoreDataCodeItemModel.shared.fetchAll()
     }
     
-    func addCodeItem(_ model: CodeModel) {
+    func add(_ model: CodeModel) {
         CoreDataCodeItemModel.shared.addItem(model)
         items = CoreDataCodeItemModel.shared.fetchAll()
     }
     
-    func deleteItem(id: Int64) {
-        CoreDataCodeItemModel.shared.deleteItem(id: id)
+    func delete(id: Int64) {
+        CoreDataCodeItemModel.shared.delete(id: id)
         items = CoreDataCodeItemModel.shared.fetchAll()
     }
     
-    func editCodeItem(_ m: CodeModel, id: Int64) {
-        CoreDataCodeItemModel.shared.editCodeItem(m, id: id)
+    func edit(_ model: CodeModel, id: Int64) {
+        CoreDataCodeItemModel.shared.edit(model, id: id)
         items = CoreDataCodeItemModel.shared.fetchAll()
     }
 }

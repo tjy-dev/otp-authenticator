@@ -62,12 +62,12 @@ class CoreDataCodeItemModel: ObservableObject {
         }
     }
     
-    func addItem(_ m: CodeModel) {
+    func addItem(_ model: CodeModel) {
         let new = CodeItem(context: context)
         new.id = (fetchAll().first?.id ?? 0) + 1
-        new.name = m.name
-        new.desc = m.desc
-        new.key = m.key
+        new.name = model.name
+        new.desc = model.desc
+        new.key = model.key
         
         do {
             try context.save()
@@ -77,7 +77,7 @@ class CoreDataCodeItemModel: ObservableObject {
         }
     }
     
-    func deleteItem(id: Int64) {
+    func delete(id: Int64) {
         let item = fetchAll().filter { item in
             item.id == id
         }.first!
@@ -92,7 +92,7 @@ class CoreDataCodeItemModel: ObservableObject {
         }
     }
     
-    func editCodeItem(_ m: CodeModel, id: Int64) {
+    func edit(_ m: CodeModel, id: Int64) {
         let item = fetchAll().filter { item in
             item.id == id
         }.first!

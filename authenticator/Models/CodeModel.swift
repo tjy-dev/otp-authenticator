@@ -76,6 +76,12 @@ struct CodeModel {
         self.name = ""; self.desc = ""; self.key = ""
     }
     
+    // Initialize static dummy
+    static
+    var dummy: Self {
+        CodeModel(name: "Name", desc: "name@example.com", key: dummyKey)
+    }
+    
     // For code validation
     var isDisabled: Bool {
         get {
