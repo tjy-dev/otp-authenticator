@@ -69,7 +69,7 @@ struct CodeView: View {
             .cornerRadius(20)
         }
         .padding(.horizontal, 15)
-        .padding(.top, 10)
+        .padding(.vertical, 5)
     }
 }
 

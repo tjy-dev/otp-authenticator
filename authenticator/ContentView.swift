@@ -28,6 +28,9 @@ struct ContentView: View {
     @ObservedObject
     var codeViewModel = CodeDataViewModel()
     
+    @State
+    var selected: CodeModel?
+    
     @State private
     var navPath = NavigationPath()
     
@@ -46,17 +49,26 @@ struct ContentView: View {
         NavigationStack(path: $navPath) {
             GeometryReader { geo in
                 ScrollView {
-                    ForEach(codeViewModel.items, id: \.id) { item in
-                        CodeView(timerModel: timerModel,
-                                 codeModel: item,
-                                 isEditing: $isEditing)
-                        .onTapGesture {
-                            if isEditing {
-                                navPath.append(item.id)
-                            } else {
-                                let code = OTPCodeGenerator.generate(key: item.key)
-                                UIPasteboard.general.string = code
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: .infinity))]) {
+                        ForEach(codeViewModel.items, id: \.id) { item in
+                            CodeView(timerModel: timerModel,
+                                     codeModel: item,
+                                     isEditing: $isEditing)
+                            .opacity(selected == item ? 0.1 : 1)
+                            .onTapGesture {
+                                if isEditing {
+                                    navPath.append(item.id)
+                                } else {
+                                    let code = OTPCodeGenerator.generate(key: item.key)
+                                    UIPasteboard.general.string = code
+                                }
                             }
+                            .onDrag {
+                                self.selected = item
+                                return NSItemProvider(object: String(item.id) as NSString)
+                            }
+                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, codeViewModel: codeViewModel))
+                            .animation(.easeInOut, value: codeViewModel.items)
                         }
                     }
                     .padding(.bottom, 20)
