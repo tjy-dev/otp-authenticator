@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct CoreDataCodeItemModel {
+class CoreDataCodeItemModel: ObservableObject {
     
     static
     let shared = CoreDataCodeItemModel()
@@ -16,6 +16,41 @@ struct CoreDataCodeItemModel {
     private var context: NSManagedObjectContext {
         return PersistenceController.shared.container.viewContext
     }
+    
+    /// preview for Canvas preview.
+    static var preview: CoreDataCodeItemModel = {
+        let result = CoreDataCodeItemModel()
+        // also works with result.context but it is the same thing.
+        let viewContext = PersistenceController.shared.container.viewContext
+        
+        // remove older data for preview.
+        // somehow it doesn't reload CoreData.
+        let request = NSFetchRequest<CodeItem>(entityName: "CodeItem")
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        do {
+            for item in try viewContext.fetch(request) {
+                viewContext.delete(item)
+            }
+        } catch {
+            fatalError("CoreData fetch error: \(error)")
+        }
+        
+        // add dummy data for preview.
+        for i in 1..<3 {
+            let new = CodeItem(context: viewContext)
+            new.id = Int64(i)
+            new.name = "Code View " + String(new.id)
+            new.desc = "name@example.com"
+            new.key = dummyKey
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
     
     func fetchAll () -> [CodeItem] {
         let request = NSFetchRequest<CodeItem>(entityName: "CodeItem")

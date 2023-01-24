@@ -14,7 +14,9 @@ import CoreData
 let dummyKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    
+    // Not using due to use of view model.
+    // @Environment(\.managedObjectContext) private var viewContext
 
     // set editmode
     @State
@@ -60,6 +62,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .padding(.bottom, 20)
                     .frame(maxWidth: .infinity)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -75,7 +78,14 @@ struct ContentView: View {
                                     Label("Enter setupkey", systemImage: "keyboard")
                                 }
                                 Button("Add dummy") {
-                                    codeViewModel.addCodeItem(CodeModel(name: "Name", desc: "name@example.com", key: dummyKey))
+                                    for _ in 0...5 {
+                                        codeViewModel
+                                            .addCodeItem(
+                                                CodeModel(name: "Name",
+                                                          desc: "name@example.com",
+                                                          key: dummyKey)
+                                            )
+                                    }
                                 }
                             } label: {
                                 Label("Add Item", systemImage: "plus")
@@ -123,6 +133,14 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView()
+            .environmentObject(CoreDataCodeItemModel.preview)
+        // https://ios-docs.dev/swiftui-environmentobject/
+        // Returns a new CoreDataCodeItemModel instance.
+        
+        // Preview crashes with this below.
+        // .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        // \. is givin the keyPath to `struct Environment`
+        // https://ios-docs.dev/swiftui-environment/
     }
 }
