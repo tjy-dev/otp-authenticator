@@ -54,7 +54,8 @@ struct ContentView: View {
                             CodeView(timerModel: timerModel,
                                      codeModel: item,
                                      isEditing: $isEditing)
-                            .opacity(selected == item ? 0.1 : 1)
+                            .opacity(selected == item ? 0.001 : 1)
+                            .animation(.default, value: selected)
                             .onTapGesture {
                                 if isEditing {
                                     navPath.append(item.id)
