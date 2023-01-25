@@ -69,7 +69,12 @@ struct ContentView: View {
                                 return NSItemProvider(object: String(item.id) as NSString)
                             }
                             .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected))
-                            .animation( selected == nil ? .none : .easeInOut, value: codeViewModel.items)
+                            .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
+                            .onChange(of: selected) { newValue in
+                                if newValue == nil {
+                                    codeViewModel.sort()
+                                }
+                            }
                         }
                     }
                     .padding(.bottom, 20)
