@@ -31,11 +31,11 @@ struct AddAccountView: View {
                         .keyboardType(.emailAddress)
                         .autocorrectionDisabled(true)
                         .textInputAutocapitalization(TextInputAutocapitalization(.none))
-#if DEBUG
-                    TextField("Key", text: $model.key)
-                        .disabled(false)
-                        .foregroundColor(.secondary)
-#endif
+                    if onDelete == nil {
+                        TextField("Key", text: $model.key)
+                            .disabled(false)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 Section {
                     if onDelete != nil {
