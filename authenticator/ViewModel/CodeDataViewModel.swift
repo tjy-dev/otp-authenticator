@@ -33,7 +33,9 @@ class CodeDataViewModel: ObservableObject {
     ///  Sort the cordata id internally.
     ///  This function won't publish the change of items as it is edited on the frontend.
     ///  If it is updated here, it is redundant, and the UI would collapse.
+    ///  UPDATE: update required to update ui's order of id
     func sort() {
         CoreDataCodeItemModel.shared.sort(list: self.items)
+        items = CoreDataCodeItemModel.shared.fetchAll().map({ CodeModel(codeItem: $0) })
     }
 }
