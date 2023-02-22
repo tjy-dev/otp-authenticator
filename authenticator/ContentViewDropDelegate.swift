@@ -12,13 +12,21 @@ struct ContentViewDropDelegate: DropDelegate {
     let item: CodeModel
     @Binding var listData: [CodeModel]
     @Binding var current: CodeModel?
+    @Binding var isExit: Bool
+    
+    var current_buff: CodeModel?
 
     func dropEntered(info: DropInfo) {
+        isExit = false
+        
+        guard let current = current else {
+            return
+        }
+        
         if item != current {
-            
-            let from = listData.firstIndex(of: current!)!
+            let from = listData.firstIndex(of: current)!
             let to = listData.firstIndex(of: item)!
-            if listData[to].id != current!.id {
+            if listData[to].id != current.id {
                 listData.move(fromOffsets: IndexSet(integer: from),
                     toOffset: to > from ? to + 1 : to)
             }
@@ -32,5 +40,9 @@ struct ContentViewDropDelegate: DropDelegate {
     func performDrop(info: DropInfo) -> Bool {
         self.current = nil
         return true
+    }
+    
+    func dropExited(info: DropInfo) {
+        isExit = true
     }
 }

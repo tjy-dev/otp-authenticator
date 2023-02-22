@@ -34,6 +34,9 @@ struct ContentView: View {
     @State private
     var navPath = NavigationPath()
     
+    @State private
+    var isExit = false
+    
     init() {
         // set navigatino bar title attributes
         // e.g. custom fonts
@@ -54,8 +57,9 @@ struct ContentView: View {
                             CodeView(timerModel: timerModel,
                                      codeModel: item,
                                      isEditing: $isEditing)
-                            .opacity(selected == item ? 0.001 : 1)
+                            .opacity(selected == item && !isExit ? 0.5 : 1)
                             .animation(.default, value: selected)
+                            .animation(.default, value: isExit)
                             .onTapGesture {
                                 if isEditing {
                                     navPath.append(item.id)
@@ -68,11 +72,13 @@ struct ContentView: View {
                                 self.selected = item
                                 return NSItemProvider(object: String(item.code) as NSString)
                             }
-                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected))
+                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, isExit: $isExit))
                             .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
                             .onChange(of: selected) { newValue in
                                 if newValue == nil {
-                                    codeViewModel.sort()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                                        codeViewModel.sort()
+                                    })
                                 }
                             }
                         }
