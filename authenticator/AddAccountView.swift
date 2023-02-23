@@ -36,6 +36,13 @@ struct AddAccountView: View {
                             .disabled(false)
                             .foregroundColor(.secondary)
                     }
+                    else {
+#if DEBUG
+                        TextField("Key", text: $model.key)
+                            .disabled(true)
+                            .foregroundColor(.secondary)
+#endif
+                    }
                 }
                 Section {
                     if onDelete != nil {
