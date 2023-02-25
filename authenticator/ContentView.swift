@@ -77,9 +77,7 @@ struct ContentView: View {
                                 .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
                                 .onChange(of: selected) { newValue in
                                     if newValue == nil {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-                                            codeViewModel.sort()
-                                        })
+//                                        codeViewModel.sort()
                                     }
                                 }
                             }

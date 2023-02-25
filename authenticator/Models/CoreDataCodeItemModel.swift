@@ -109,21 +109,20 @@ class CoreDataCodeItemModel: ObservableObject {
     }
     
     func sort(list: [CodeModel]) {
-        
-        let items = fetchAll()
-        
-        items.enumerated().forEach { (i, item) in
-            item.name = list[i].name
-            item.id = Int64(-1 * i)
-            item.desc = list[i].desc
-            item.key = list[i].key
-        }
-        
-        do {
-            try context.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+//        let items = fetchAll()
+//
+//        items.enumerated().forEach { (i, item) in
+//            item.name = list[i].name
+//            item.id = Int64(-1 * i)
+//            item.desc = list[i].desc
+//            item.key = list[i].key
+//        }
+//
+//        do {
+//            try context.save()
+//        } catch {
+//            let nsError = error as NSError
+//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//        }
     }
 }
