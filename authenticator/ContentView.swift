@@ -77,7 +77,7 @@ struct ContentView: View {
                                 .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
                                 .onChange(of: selected) { newValue in
                                     if newValue == nil {
-//                                        codeViewModel.sort()
+                                        codeViewModel.sort()
                                     }
                                 }
                             }
