@@ -34,6 +34,11 @@ struct CodeView: View {
                         Text(verbatim: codeModel.desc)
                             .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
+#if DEBUG
+                        Text(String(codeModel.id))
+                            .font(.avenir())
+                            .foregroundColor(Color(.secondaryLabel))
+#endif
                     }
                     Spacer()
                     if isEditing {
