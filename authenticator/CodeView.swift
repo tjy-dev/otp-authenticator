@@ -68,8 +68,6 @@ struct CodeView: View {
             .background(Color(.contentBackground))
             .cornerRadius(20)
         }
-        .padding(.horizontal, 15)
-        .padding(.vertical, 5)
     }
 }
 

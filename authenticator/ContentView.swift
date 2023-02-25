@@ -54,33 +54,37 @@ struct ContentView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: .infinity))]) {
                         ForEach(codeViewModel.items, id: \.id) { item in
-                            CodeView(timerModel: timerModel,
-                                     codeModel: item,
-                                     isEditing: $isEditing)
-                            .opacity(selected == item && !isExit ? 0.5 : 1)
-                            .animation(.default, value: selected)
-                            .animation(.default, value: isExit)
-                            .onTapGesture {
-                                if isEditing {
-                                    navPath.append(item.id)
-                                } else {
-                                    let code = OTPCodeGenerator.generate(key: item.key)
-                                    UIPasteboard.general.string = code
+                            Group {
+                                CodeView(timerModel: timerModel,
+                                         codeModel: item,
+                                         isEditing: $isEditing)
+                                .opacity(selected == item && !isExit ? 0.5 : 1)
+                                .animation(.default, value: selected)
+                                .animation(.default, value: isExit)
+                                .onTapGesture {
+                                    if isEditing {
+                                        navPath.append(item.id)
+                                    } else {
+                                        let code = OTPCodeGenerator.generate(key: item.key)
+                                        UIPasteboard.general.string = code
+                                    }
+                                }
+                                .onDrag {
+                                    self.selected = item
+                                    return NSItemProvider(object: String(item.code) as NSString)
+                                }
+                                .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, isExit: $isExit))
+                                .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
+                                .onChange(of: selected) { newValue in
+                                    if newValue == nil {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+                                            codeViewModel.sort()
+                                        })
+                                    }
                                 }
                             }
-                            .onDrag {
-                                self.selected = item
-                                return NSItemProvider(object: String(item.code) as NSString)
-                            }
-                            .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, isExit: $isExit))
-                            .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
-                            .onChange(of: selected) { newValue in
-                                if newValue == nil {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
-                                        codeViewModel.sort()
-                                    })
-                                }
-                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 5)
                         }
                     }
                     .padding(.bottom, 20)
