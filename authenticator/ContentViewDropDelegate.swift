@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentViewDropDelegate: DropDelegate {
     let item: CodeModel
     @Binding var listData: [CodeModel]
+    var codeViewModel: CodeDataViewModel
     @Binding var current: CodeModel?
     @Binding var isExit: Bool
     
@@ -34,6 +35,7 @@ struct ContentViewDropDelegate: DropDelegate {
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {
+        codeViewModel.sort()
         return DropProposal(operation: .move)
     }
 

@@ -39,6 +39,7 @@ class CoreDataCodeItemModel: ObservableObject {
         for i in 1..<3 {
             let new = CodeItem(context: viewContext)
             new.id = Int64(i)
+            new.order = Int64(i)
             new.name = "Code View " + String(new.id)
             new.desc = "name@example.com"
             new.key = dummyKey
@@ -54,7 +55,7 @@ class CoreDataCodeItemModel: ObservableObject {
     
     func fetchAll () -> [CodeItem] {
         let request = NSFetchRequest<CodeItem>(entityName: "CodeItem")
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: false)]
         do {
             return try context.fetch(request)
         } catch {
@@ -64,7 +65,8 @@ class CoreDataCodeItemModel: ObservableObject {
     
     func addItem(_ model: CodeModel) {
         let new = CodeItem(context: context)
-        new.id = (fetchAll().first?.id ?? 0) + 1
+        new.id = Int64(UUID().hashValue)
+        new.order = (fetchAll().first?.order ?? 0) + 1
         new.name = model.name
         new.desc = model.desc
         new.key = model.key
@@ -109,16 +111,16 @@ class CoreDataCodeItemModel: ObservableObject {
     }
     
     func sort(list: [CodeModel]) {
-        
         let items = fetchAll()
-        
+
         items.enumerated().forEach { (i, item) in
             item.name = list[i].name
-            item.id = Int64(-1 * i)
+            item.id = list[i].id
+            item.order = Int64(-1 * i)
             item.desc = list[i].desc
             item.key = list[i].key
         }
-        
+
         do {
             try context.save()
         } catch {
