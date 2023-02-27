@@ -73,7 +73,13 @@ struct ContentView: View {
                                     self.selected = item
                                     return NSItemProvider(object: String(item.code) as NSString)
                                 }
-                                .onDrop(of: [.text], delegate: ContentViewDropDelegate(item: item, listData: $codeViewModel.items, current: $selected, isExit: $isExit))
+                                .onDrop(of: [.text], delegate:
+                                            ContentViewDropDelegate(item: item,
+                                                                    listData: $codeViewModel.items,
+                                                                    codeViewModel: codeViewModel,
+                                                                    current: $selected,
+                                                                    isExit: $isExit)
+                                )
                                 .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
                                 .onChange(of: selected) { newValue in
                                     if newValue == nil {
