@@ -129,4 +129,27 @@ class CoreDataCodeItemModel: ObservableObject {
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
+    
+    func move(_ from: Int, _ to: Int) {
+        let items = fetchAll()
+        
+        items[from].order = items[to].order
+        
+        if from < to {
+            for i in from+1...to {
+                items[i].order -= 1
+            }
+        } else {
+            for i in to..<from {
+                items[i].order += 1
+            }
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }
