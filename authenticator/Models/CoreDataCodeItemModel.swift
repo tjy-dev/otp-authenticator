@@ -137,11 +137,11 @@ class CoreDataCodeItemModel: ObservableObject {
         
         if from < to {
             for i in from+1...to {
-                items[i].order -= 1
+                items[i].order += 1
             }
         } else {
             for i in to..<from {
-                items[i].order += 1
+                items[i].order -= 1
             }
         }
         
