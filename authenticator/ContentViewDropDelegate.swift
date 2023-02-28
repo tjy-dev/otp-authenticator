@@ -32,10 +32,11 @@ struct ContentViewDropDelegate: DropDelegate {
                     toOffset: to > from ? to + 1 : to)
             }
         }
+        
+        codeViewModel.sort()
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {
-        codeViewModel.sort()
         return DropProposal(operation: .move)
     }
 
