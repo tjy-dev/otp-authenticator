@@ -81,11 +81,6 @@ struct ContentView: View {
                                                                     isExit: $isExit)
                                 )
                                 .animation(selected == nil ? .none : .easeInOut, value: codeViewModel.items)
-                                .onChange(of: selected) { newValue in
-                                    if newValue == nil {
-                                        codeViewModel.sort()
-                                    }
-                                }
                             }
                             .padding(.horizontal, 15)
                             .padding(.vertical, 5)
