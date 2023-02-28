@@ -26,7 +26,7 @@ class CoreDataCodeItemModel: ObservableObject {
         // remove older data for preview.
         // somehow it doesn't reload CoreData.
         let request = NSFetchRequest<CodeItem>(entityName: "CodeItem")
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "order", ascending: false)]
         do {
             for item in try viewContext.fetch(request) {
                 viewContext.delete(item)
@@ -112,11 +112,12 @@ class CoreDataCodeItemModel: ObservableObject {
     
     func sort(list: [CodeModel]) {
         let items = fetchAll()
-
+        let count = items.count
+        
         items.enumerated().forEach { (i, item) in
             item.name = list[i].name
             item.id = list[i].id
-            item.order = Int64(-1 * i)
+            item.order = Int64(count - i)
             item.desc = list[i].desc
             item.key = list[i].key
         }
