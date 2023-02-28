@@ -35,7 +35,7 @@ struct CodeView: View {
                             .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
 #if DEBUG
-                        Text(String(codeModel.id))
+                        Text(String(codeModel.id) + "order:" + String(codeModel.order))
                             .font(.avenir())
                             .foregroundColor(Color(.secondaryLabel))
 #endif
