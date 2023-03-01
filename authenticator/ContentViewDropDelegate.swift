@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AudioToolbox
 
 struct ContentViewDropDelegate: DropDelegate {
     let item: CodeModel
@@ -25,6 +26,7 @@ struct ContentViewDropDelegate: DropDelegate {
         }
         
         if item != current {
+            UISelectionFeedbackGenerator().selectionChanged()
             let from = listData.firstIndex(of: current)!
             let to = listData.firstIndex(of: item)!
             if listData[to].id != current.id {
