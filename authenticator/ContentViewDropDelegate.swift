@@ -31,11 +31,11 @@ struct ContentViewDropDelegate: DropDelegate {
                 listData.move(fromOffsets: IndexSet(integer: from),
                     toOffset: to > from ? to + 1 : to)
             }
+            codeViewModel.move(from, to)
         }
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {
-        codeViewModel.sort()
         return DropProposal(operation: .move)
     }
 
