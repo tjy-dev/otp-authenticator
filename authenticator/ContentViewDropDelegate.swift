@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AudioToolbox
 
 struct ContentViewDropDelegate: DropDelegate {
     let item: CodeModel
@@ -25,17 +26,18 @@ struct ContentViewDropDelegate: DropDelegate {
         }
         
         if item != current {
+            UISelectionFeedbackGenerator().selectionChanged()
             let from = listData.firstIndex(of: current)!
             let to = listData.firstIndex(of: item)!
             if listData[to].id != current.id {
                 listData.move(fromOffsets: IndexSet(integer: from),
                     toOffset: to > from ? to + 1 : to)
             }
+            codeViewModel.move(from, to)
         }
     }
     
     func dropUpdated(info: DropInfo) -> DropProposal? {
-        codeViewModel.sort()
         return DropProposal(operation: .move)
     }
 

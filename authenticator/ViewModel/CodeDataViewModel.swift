@@ -40,4 +40,8 @@ class CodeDataViewModel: ObservableObject {
     func sort() {
         CoreDataCodeItemModel.shared.sort(list: self.items)
     }
+    
+    func move(_ from: Int, _ to: Int) {
+        CoreDataCodeItemModel.shared.move(from, to)
+    }
 }

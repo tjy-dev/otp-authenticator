@@ -67,14 +67,15 @@ struct CodeModel: Identifiable, Equatable {
         self.desc = codeItem.desc ?? ""
         self.key  = codeItem.key ?? ""
         self.id = codeItem.id
+        self.order = codeItem.order
     }
     
     init(name: String, desc: String, key: String) {
-        self.name = name; self.desc = desc; self.key = key; self.id = -1
+        self.name = name; self.desc = desc; self.key = key; self.id = -1; self.order = -1
     }
 
     init() {
-        self.name = ""; self.desc = ""; self.key = ""; self.id = -1
+        self.name = ""; self.desc = ""; self.key = ""; self.id = -1; self.order = -1
     }
     
     // Initialize static dummy
@@ -93,6 +94,7 @@ struct CodeModel: Identifiable, Equatable {
     }
     
     var id: Int64
+    var order: Int64
     var name: String
     var desc: String
     var key : String
